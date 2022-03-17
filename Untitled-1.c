@@ -13,7 +13,7 @@ void Swap(int *a,int *b){
 
 void Randarray(int *range,int n){
     for(int i = 0; i < n; i++){
-        range[i] = rand()%10000;
+        range[i] = rand();
     }
 }
 
@@ -170,6 +170,7 @@ int bits(int x,int k,int j){
     return(x>>k) & ~(~0<<j);
 }
 
+/*
 void Radix(int *range, int l,int r, int b){
     int i,j;
     if(r > l && b >= 0){
@@ -184,9 +185,12 @@ void Radix(int *range, int l,int r, int b){
     Radix(range,l,j-1,b-1);
     Radix(range,j,r,b-1);
 }
+*/
 
 
 int main(void){
+    FILE *file;
+    file = fopen("test.txt","w");
     int range[SAMPLESIZE];
     int n = SAMPLESIZE;
     clock_t start,end;
@@ -198,6 +202,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("バブルソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"バブルソートの実行時間は%ldms\n",(end-start));
     
 
     //選択ソート
@@ -207,6 +212,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("選択ソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"選択ソートの実行時間は%ldms\n",(end-start));
     
     //挿入ソート
     
@@ -216,6 +222,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("挿入ソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"挿入ソートの実行時間は%ldms\n",(end-start));
     
     //クイックソート
     Randarray(range,SAMPLESIZE);
@@ -224,6 +231,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("クイックソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"クイックソートの実行時間は%ldms\n",(end-start));
 
     //クイックソート2
     Randarray(range,SAMPLESIZE);
@@ -232,6 +240,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n-1);
     printf("クイックソート2の実行時間は%ldms\n",(end-start));
+    fprintf(file,"クイックソート2の実行時間は%ldms\n",(end-start));
     
     //マージソート
     Randarray(range,SAMPLESIZE);
@@ -240,6 +249,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("マージソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"マージソートの実行時間は%ldms\n",(end-start));
 
     //シェルソート
     Randarray(range,SAMPLESIZE);
@@ -248,6 +258,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("シェルソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"シェルソートの実行時間は%ldms\n",(end-start));
 
 
     //ヒープソート
@@ -257,6 +268,7 @@ int main(void){
     end = clock();
     Arrayjudge(range,n);
     printf("ヒープソートの実行時間は%ldms\n",(end-start));
+    fprintf(file,"ヒープソートの実行時間は%ldms\n",(end-start));
 
     //基数ソートわからん
     /*
@@ -269,5 +281,6 @@ int main(void){
     */
 
     //Printrange(range,n);
+    fclose(file);
     return 0;
 }
